@@ -7,7 +7,8 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, `${file.originalname}-${new Date(Date.now()).toISOString()}`);
+    cb(null, `${file.originalname}`);
+    // cb(null, `${file.originalname`}) -${new Date(Date.now()).toISOString()}`);
   },
 });
 
@@ -18,5 +19,6 @@ indexRouter.get("/", (req, res) => {
   return res.status(200).send({ message: "API is running fine" });
 });
 indexRouter.post("/log/upload", upload.single("log"), contrl.addLogFile);
+indexRouter.post("/log/search", contrl.findLogFile);
 indexRouter.put("/log/remove", contrl.removeLogFile);
 module.exports = indexRouter;
