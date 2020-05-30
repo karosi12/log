@@ -12,11 +12,11 @@ app.use(bodyParser.json({ limit: "30mb" }));
 app.set("port", config.PORT);
 app.use("/api", route);
 app.all("/*", (req, res) => {
-  res.status(404).send("404 - Not found");
+  res.status(404).send({ message: "404 - Not found" });
 });
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Opps something went wrong");
+  res.status(500).send({ message: "Opps something went wrong" });
 });
 
 app.listen(app.get("port"), () => {
