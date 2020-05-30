@@ -49,7 +49,7 @@ module.exports.deleteFile = async (params) => {
     }
   }).promise();
   return {
-    message: `${params.keys} document deleted successfully`,
-    data: params.keys,
+    message: `${params.Key} document deleted successfully`,
+    data: params.Key,
   };
 };

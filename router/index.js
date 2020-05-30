@@ -18,4 +18,5 @@ indexRouter.get("/", (req, res) => {
   return res.status(200).send({ message: "API is running fine" });
 });
 indexRouter.post("/log/upload", upload.single("log"), contrl.addLogFile);
+indexRouter.put("/log/remove", contrl.removeLogFile);
 module.exports = indexRouter;
