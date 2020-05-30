@@ -1,3 +1,8 @@
 node_modules
 .env
 *-lock.json
+todo
+# exclude everything
+uploads/*
+# exception to the rule
+!uploads/.gitkeep
