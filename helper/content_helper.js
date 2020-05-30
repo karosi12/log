@@ -11,7 +11,7 @@ const s3 = new AWS.S3({
   secretAccessKey: config.SECRET_ACCESS_KEY,
 });
 
-module.exports.uploadFile = async (file, contentType) => {
+module.exports.uploadFile = async (file) => {
   if (file.filename) {
     const content = await readFileAsync(`./uploads/${file.filename}`);
     if (!content) {
@@ -19,10 +19,12 @@ module.exports.uploadFile = async (file, contentType) => {
     } else {
       const fileContent = await content;
       const params = {
-        Bucket: config.BUCKET,
+        Bucket: config.BUCKET_FILE_PATH,
         Key: file.filename, // file name you want to save as
         Body: fileContent,
         ACL: "public-read",
+        ContentEncoding: "base64",
+        ContentDisposition: "inline",
       };
       const response = await s3.upload(params).promise();
       await unlinkAsync(`./uploads/${file.filename}`);
@@ -52,4 +54,11 @@ module.exports.deleteFile = async (params) => {
     message: `${params.Key} document deleted successfully`,
     data: params.Key,
   };
+};
+
+module.exports.searchFile = async (params) => {
+  const data = await s3.listObjects(params).promise();
+  if (!data || data.Contents.length === 0)
+    return { message: "No document", data: null };
+  return { message: "file retrieved", data: data.Contents };
 };
