@@ -3,16 +3,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const config = require("./config/local");
-
+const route = require("./router/index");
 const app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.set("port", config.PORT);
+app.use("/api", route);
 app.all("/*", (req, res) => {
   res.status(404).send("404 - Not found");
 });
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Opps something went wrong");
