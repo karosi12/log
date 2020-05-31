@@ -19,6 +19,12 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: "Opps something went wrong" });
 });
 
+process.on("SIGINT", () => {
+  console.log("Server shutting down");
+  console.log("Server shut down success");
+  process.exit(0);
+});
+
 app.listen(app.get("port"), () => {
   console.log("Server started on port " + app.get("port"));
 });

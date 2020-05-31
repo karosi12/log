@@ -35,7 +35,7 @@ module.exports.findLogFile = async (req, res) => {
   if (!fileName)
     return res.status(400).send({ message: "file name is required" });
   const params = {
-    Bucket: "gidimediacity", //config.BUCKET,
+    Bucket: config.BUCKET,
     Delimiter: "/",
   };
   const result = await logRetrieve(params);
