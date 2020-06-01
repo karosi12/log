@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ssh jenkins@192.241.138.167 <<EOF
+    
+EOF

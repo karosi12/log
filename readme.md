@@ -18,6 +18,19 @@ clone the repository then cd into the project folder run
 | PUT         | baseurl/api/log/search | To find log object, using contentType of application/json {"fileName": "savedlogfile"}            |  |
 | PUT         | baseurl/ap/log/remove  | To delete a log, using contentType of application/json {"fileName": "savedlogfile"}               |
 
+env sample
+
+`PORT=`
+
+`ACCESS_KEYID=`
+
+`SECRET_ACCESS_KEY=`
+
+`SPACE_ENDPOINT=`
+
+`BUCKET_FILE_PATH="{buckername}/{nestedfolder}"`
+
+`BUCKET={buckername}`
 ## Authors
 
 **Adeyemi Kayode** - _Initial work_ - [paginate-mongoose-data](https://github.com/karosi12/paginate-mongoose-data)
