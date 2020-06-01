@@ -6,4 +6,4 @@ todo
 uploads/*
 # exception to the rule
 !uploads/.gitkeep
-deploy.dev
+deploy*

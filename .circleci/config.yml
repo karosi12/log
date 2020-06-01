@@ -1,0 +1,23 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
+      - run:
+          name: docker-login
+          command: docker login --username=${DOCKER_USERNAME} --password=${DOCKER_PASSWORD}
+      - deploy:
+          name: digital-ocean
+          command: ssh -o "StrictHostKeyChecking no" root@192.241.138.167 "docker stop $(docker ps -a -q); docker pull karosi12/log:v1; docker run --rm -p 3300:3300 karosi12/log:v1;" circleci step halt
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
